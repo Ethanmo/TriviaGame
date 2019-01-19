@@ -64,9 +64,9 @@ function reset(){
 function newQuestion() {
     if (questionIndex < questionList.length - 1){
         questionIndex++;
-        console.log("questionIndex++");
         timer = 10;
-        runTimer();
+        $(".timerArea").html("remaining time : " + timer);
+        startTimer();
         givenTime = setTimeout(timeOutScreen, 1000 * 10)
         $(".questionArea").html(questionList[questionIndex].q);
         $(".answerArea").empty();
@@ -92,7 +92,6 @@ $(document).on("click", ".answerOptions", function(){
     var answerId = $(this).attr("id");
     //var correctId = questionList[questionIndex].correctIndex;
     if (answerId == questionList[questionIndex].correctIndex){
-        console.log(questionList[questionIndex].correctIndex);
         correctScreen();
     } else {
         incorrectScreen();
@@ -118,7 +117,6 @@ function incorrectScreen(){
 
 function timeOutScreen(){
     //something
-    console.log("time up");
     unansweredCount++;
     //add this when choosing correct or incorrect answers, no need for timeoutScreen
     //clearTimeout(timeOutId); 
@@ -129,8 +127,7 @@ function timeOutScreen(){
 
 function showCorrectAnswer(){
     $(".answerArea").html(questionList[questionIndex].answerList[questionList[questionIndex].correctIndex]);
-    console.log("new game in 3");
-    setTimeout(newQuestion, 3000);
+    setTimeout(newQuestion, 1000);
 }
 
 function showResult(){
@@ -146,18 +143,19 @@ function showResult(){
     $(".answerArea").append(correctDiv);
     $(".answerArea").append(incorrectDiv);
     $(".answerArea").append(unansweredDiv);
+    $(".answerArea").append("<button class='restart' onClick='reset()'>Play Again</button>")
 }
 
 //add 1 to timer
 function timeCount () {
-    $(".timerArea").html("remaining time : " + timer);
     timer--;
+    $(".timerArea").html("remaining time : " + timer);
+   
     //console.log(timer);
 }
 
 //run function timeCount every second using setInterval
-function runTimer(){
-    console.log("timer is running")
+function startTimer(){
     timeRemain = setInterval(timeCount, 1000); 
 }
 
