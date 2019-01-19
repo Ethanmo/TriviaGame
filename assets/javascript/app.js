@@ -118,7 +118,6 @@ function incorrectScreen(){
 
 function showCorrectAnswer(){
     $(".answerArea").html(questionList[questionIndex].answerList[questionList[questionIndex].correctIndex]);
-    clearTimeout(timeOutId);
     console.log("new game in 3");
     setTimeout(newQuestion, 3000);
 }
