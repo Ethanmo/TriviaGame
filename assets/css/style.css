@@ -3,12 +3,14 @@ html body {
     box-sizing: border-box;
 }
 
-html {
+body {
     background: url(../images/bg.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    font-family: 'Lato', sans-serif;
+    color: #575863;
 
 }
 
@@ -18,7 +20,7 @@ html {
     margin-top: 100px;
     text-align: center;
     background-color: #ffede8;
-    opacity: 0.9;
+    opacity: 0.95;
     min-height: 800px;
     border-radius: 25px;
 }
@@ -29,9 +31,10 @@ html {
 
 #gameName {
     letter-spacing: 2px;
-    font-size: 30px;
+    font-size: 40px;
     margin-top: 0;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    font-family: 'ZCOOL KuaiLe', cursive;
 }
 
 .gameContainer {
@@ -39,7 +42,6 @@ html {
 }
 
 .questionArea {
-    background-color: white;
     max-width: 70%;
     border-radius: 10px;
     padding-left: 10px;
@@ -49,17 +51,29 @@ html {
 .questionArea {    
     margin-left: 15%;
     margin-bottom: 30px;
+    font-weight: bold;
 }
 
 .timerArea {
     margin-bottom: 20px;
+    font-size: 25px;
 }
 
 .answerArea {
     display: inline-block;
+    font-size: 25px;
 }
 
 
 .answerOptions:hover {
     background-color: #b8c7e0;
+    cursor: pointer;
+}
+
+.startGame {
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ffcc99;
+    border-width: 0;
+    color: #666699;
 }
