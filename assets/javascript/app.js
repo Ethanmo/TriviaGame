@@ -47,7 +47,7 @@ var questionList = [
 var correctCount;
 var incorrectCount;
 var unansweredCount;
-var timer = 30;
+var timer = 10;
 var intervalId;
 var timeOutId;
 var resultScreenTimeOut;
@@ -62,12 +62,12 @@ function reset(){
 }
 
 function newQuestion() {
-    if (questionIndex < questionList.length){
+    if (questionIndex < questionList.length - 1){
         questionIndex++;
         console.log("questionIndex++");
-        timer = 30;
+        timer = 10;
         runTimer();
-        timeOutId = setTimeout(timeOutScreen, 1000 * 30)
+        givenTime = setTimeout(timeOutScreen, 1000 * 10)
         $(".questionArea").html(questionList[questionIndex].q);
         $(".answerArea").empty();
         
@@ -80,39 +80,50 @@ function newQuestion() {
             answerDiv.attr("id", i);
             $(".answerArea").append(answerDiv);
         }
-
-      
-
         
     } else {
         showResult();
     }
 }
   
-
+$(document).on("click", ".answerOptions", function(){
+    clearTimeout(givenTime);
+    clearInterval(timeRemain);
+    var answerId = $(this).attr("id");
+    //var correctId = questionList[questionIndex].correctIndex;
+    if (answerId == questionList[questionIndex].correctIndex){
+        console.log(questionList[questionIndex].correctIndex);
+        correctScreen();
+    } else {
+        incorrectScreen();
+    }
+});
     
 
-    $(document).on("click", ".answerOptions", function(){
-            clearInterval(intervalId);
-            var answerId = $(this).attr("id");
-            var correctId = questionList[questionIndex].correctIndex;
-            if (answerId === correctId){
-                console.log(correctId);
-                correctScreen();
-            } else {
-                incorrectScreen();
-            }
-        });
+    
 
 //correct screen
 function correctScreen(){
     //something
     $(".questionArea").html("<h2>Correct</h2>");
     showCorrectAnswer();
+    correctCount++;
 }
 
 function incorrectScreen(){
     $(".questionArea").html("<h2>Wrong</h2>");
+    showCorrectAnswer();
+    incorrectCount++;
+}
+
+function timeOutScreen(){
+    //something
+    console.log("time up");
+    unansweredCount++;
+    //add this when choosing correct or incorrect answers, no need for timeoutScreen
+    //clearTimeout(timeOutId); 
+    clearInterval(timeRemain);
+    $(".questionArea").html("Times up");
     showCorrectAnswer();
 }
 
@@ -120,6 +131,21 @@ function showCorrectAnswer(){
     $(".answerArea").html(questionList[questionIndex].answerList[questionList[questionIndex].correctIndex]);
     console.log("new game in 3");
     setTimeout(newQuestion, 3000);
+}
+
+function showResult(){
+    var correctDiv = $("<div>");
+    var incorrectDiv = $("<div>");
+    var unansweredDiv = $("<div>");
+    correctDiv.html("correct : " + correctCount);
+    incorrectDiv.html("incorrect : " + incorrectCount);
+    unansweredDiv.html("unanswered : " + unansweredCount);
+    $(".timerArea").empty();
+    $(".questionArea").empty();
+    $(".answerArea").empty();
+    $(".answerArea").append(correctDiv);
+    $(".answerArea").append(incorrectDiv);
+    $(".answerArea").append(unansweredDiv);
 }
 
 //add 1 to timer
@@ -132,15 +158,8 @@ function timeCount () {
 //run function timeCount every second using setInterval
 function runTimer(){
     console.log("timer is running")
-    intervalId = setInterval(timeCount, 1000); 
+    timeRemain = setInterval(timeCount, 1000); 
 }
 
-function timeOutScreen(){
-    //something
-    console.log("time up");
-    //add this when choosing correct or incorrect answers, no need for timeoutScreen
-    //clearTimeout(timeOutId); 
-    clearInterval(intervalId);
-}
 
 reset();
