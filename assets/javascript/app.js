@@ -74,7 +74,12 @@ function newQuestion() {
         //display all the answer options
         var answers = questionList[questionIndex].answerList;
         for (var i = 0; i < answers.length; i++){
-            var answerDiv = $("<div>");
+            var answerDiv = $("<div>", 
+            {css: {
+                "margin-bottom": "10px",
+                "background-color": "White"
+            }
+            });
             answerDiv.text(answers[i]);
             answerDiv.attr("class", "answerOptions");
             answerDiv.attr("id", i);
@@ -150,14 +155,10 @@ function showResult(){
 function timeCount () {
     timer--;
     $(".timerArea").html("remaining time : " + timer);
-   
-    //console.log(timer);
-}
+   }
 
 //run function timeCount every second using setInterval
 function startTimer(){
     timeRemain = setInterval(timeCount, 1000); 
 }
 
-
-reset();

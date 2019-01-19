@@ -1,0 +1,65 @@
+html body {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+html {
+    background: url(../images/bg.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+.gameArea {
+    max-width: 60%;
+    margin-left: 20%;
+    margin-top: 100px;
+    text-align: center;
+    background-color: #ffede8;
+    opacity: 0.9;
+    min-height: 800px;
+    border-radius: 25px;
+}
+
+#gamelogo {
+    margin-top: 50px;
+}
+
+#gameName {
+    letter-spacing: 2px;
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+.gameContainer {
+    font-size: 35px;
+}
+
+.questionArea {
+    background-color: white;
+    max-width: 70%;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.questionArea {    
+    margin-left: 15%;
+    margin-bottom: 30px;
+}
+
+.timerArea {
+    margin-bottom: 20px;
+}
+
+.answerArea {
+    display: inline-block;
+}
+
+
+.answerOptions:hover {
+    background-color: #b8c7e0;
+}
